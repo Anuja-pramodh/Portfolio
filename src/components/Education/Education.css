@@ -1,0 +1,35 @@
+.education-section {
+  padding: 80px 10%;
+  background-color: #0a0a0a;
+}
+
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.edu-card {
+  background: #171717;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid #222;
+  transition: 0.3s;
+}
+
+.edu-card:hover {
+  border-color: #3b82f6;
+  transform: translateY(-5px);
+}
+
+.edu-card h3 { color: #fff; margin-bottom: 10px; }
+.degree { color: #3b82f6; font-weight: bold; margin-bottom: 5px; }
+.univ { color: #a3a3a3; font-size: 0.9rem; }
+.year { display: block; margin-top: 15px; color: #666; font-weight: bold; }

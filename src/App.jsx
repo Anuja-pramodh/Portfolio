@@ -1,21 +1,27 @@
-import { BrowserRouter as Router } from 'react-router-dom';
+// src/App.jsx
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
-import Education from './components/Education/Education';
+import Projects from './components/Projects/Projects';
+import Contact from './components/Contact/Contact';
+import About from './components/About/About';
+import Footer from './components/Footer/Footer';
 import './App.css';
 
 function App() {
   return (
-    <Router>
-      <div className="portfolio-app">
-        <Navbar />
-        <main>
-          <Hero />
-          <Education />
-          {/* අනිත් components මෙතනට පසුව එක් කරන්න */}
-        </main>
-      </div>
-    </Router>
+    <div className="portfolio-container">
+      <Navbar />
+      <main>
+        <Hero />
+        <hr className="divider" />
+        <About />
+        <hr className="divider" />
+        <Projects />
+        <hr className="divider" />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
   );
 }
 

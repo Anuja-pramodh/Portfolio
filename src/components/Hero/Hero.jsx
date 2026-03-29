@@ -13,11 +13,11 @@ const Hero = () => {
           gap={15}
           baseColor="#271E37"
           activeColor="#5227FF"
-          proximity={120}
-          shockRadius={250}
+          proximity={150}
+          shockRadius={2500}
           shockStrength={5}
           resistance={750}
-          returnDuration={1.5}
+          returnDuration={5}
         />
       </div>
 

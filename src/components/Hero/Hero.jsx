@@ -1,65 +1,63 @@
+import React from 'react';
 import DotGrid from '../Animation/DotGrid/DotGrid';
 import './Hero.css';
-import profileImg from '../..//assets/abimg.png';
+import profileImg from '../../assets/abimg.png';
 
 const Hero = () => {
   return (
     <section className="hero" id="home">
-
-      {/* Background */}
+      {/* Dynamic Background */}
       <div className="hero-bg">
         <DotGrid
-          dotSize={5}
-          gap={15}
-          baseColor="#271E37"
-          activeColor="#5227FF"
-          proximity={150}
-          shockRadius={2500}
-          shockStrength={5}
-          resistance={750}
-          returnDuration={5}
+          dotSize={3}
+          gap={25}
+          baseColor="#1e1b4b"
+          activeColor="#7c3aed"
+          proximity={120}
+          shockRadius={180}
+          shockStrength={3}
+          resistance={1000}
+          returnDuration={2}
         />
       </div>
 
-      {/* Glow */}
-      <div className="hero-blob hero-blob--1" />
-      <div className="hero-blob hero-blob--2" />
-
-      {/* Content Wrapper */}
       <div className="hero-wrapper">
-
-        {/* LEFT SIDE */}
+        {/* LEFT SIDE: Typography */}
         <div className="hero-content">
+          <div className="hero-badge">
+            <span className="pulse-icon"></span>
+            Available for Hire
+          </div>
+
           <h1 className="hero-name">
             Anuja <br />
             <span className="hero-name--outline">Pramodh</span>
           </h1>
 
           <div className="hero-meta">
-            <p className="hero-role">Full-Stack Developer</p>
-            <span className="hero-divider"></span>
-            <p className="hero-location">📍 Sri Lanka</p>
+            <span className="hero-role">Full-Stack Developer</span>
+            <div className="hero-sep"></div>
+            <span className="hero-loc">Sri Lanka</span>
           </div>
 
-          <p className="hero-tagline">
-            I craft fast, elegant digital products — from pixel-perfect UIs to robust back-end systems.
+          <p className="hero-description">
+            I build high-performance web applications with a focus on 
+            clean architecture and intuitive user experiences.
           </p>
 
           <div className="hero-cta">
-            <a href="#projects" className="btn-primary">
-              View Projects →
-            </a>
-            <a href="#contact" className="btn-ghost">
-              Get in Touch
-            </a>
+            <a href="#projects" className="btn-primary">View Work</a>
+            <a href="#contact" className="btn-ghost">Contact Me</a>
           </div>
         </div>
 
-        {/* RIGHT SIDE IMAGE */}
-        <div className="hero-image">
-          <img src={profileImg} alt="Anuja Pramodh" />
+        {/* RIGHT SIDE: 3D Image Card */}
+        <div className="hero-image-container">
+          <div className="glass-card">
+            <img src={profileImg} alt="Anuja Pramodh" className="hero-photo" />
+            <div className="card-glow"></div>
+          </div>
         </div>
-
       </div>
     </section>
   );

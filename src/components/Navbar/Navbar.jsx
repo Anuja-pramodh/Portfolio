@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -6,26 +6,26 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const links = ['Home', 'About', 'Projects', 'Contact'];
+  const links = [
+    { label: 'Home',     href: '#home'     },
+    { label: 'About',    href: '#about'    },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Contact',  href: '#contact'  },
+  ];
 
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
-      <div className="logo">AP.</div>
-
+      
       <ul className={`nav-links ${menuOpen ? 'nav-links--open' : ''}`}>
-        {links.map((link, i) => (
-          <li key={link} style={{ '--i': i }}>
-            <a
-              href={`#${link.toLowerCase()}`}
-              onClick={() => setMenuOpen(false)}
-            >
-              <span className="nav-index">0{i + 1}</span>
-              {link}
+        {links.map(({ label, href }, i) => (
+          <li key={label} style={{ '--i': i }}>
+            <a href={href} onClick={() => setMenuOpen(false)}>
+              {label}
             </a>
           </li>
         ))}

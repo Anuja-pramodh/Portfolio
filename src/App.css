@@ -3,7 +3,7 @@
 ========================= */
 .portfolio-container {
   margin: 0 auto;
-  max-width: 20000px;   /* optional: prevent ultra-wide stretch */
+  max-width: 20000;   /* optional: prevent ultra-wide stretch */
   padding: 0 ;     /* small horizontal padding for mobile */
   overflow-x: hidden;
 }

@@ -26,3 +26,14 @@ function App() {
 }
 
 export default App;
+
+
+
+{/* 
+
+git add .
+git commit -m "Update portfolio and features"
+git push origin main 
+
+
+*/}

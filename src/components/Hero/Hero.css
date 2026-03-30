@@ -201,10 +201,11 @@ html {
   max-height: 65vh;
   width: auto;
   object-fit: contain;
+  transition: all 0.5s;
 }
 
 .hero-photo:hover {
-  transform: scale(1.05) rotate(1deg);
+  transform: scale(1.1) ;
 }
 
 /* Glow */

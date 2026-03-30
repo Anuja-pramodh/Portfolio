@@ -1,21 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+// Import the icons
+import { FaGithub, FaLinkedinIn, FaFacebookF, FaTiktok } from 'react-icons/fa';
+import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
 import './Contact.css';
 
 const MAX_MSG = 500;
 
 const socials = [
-  { label: 'GitHub',   href: 'https://github.com/shifan-mhd', icon: 'GH' }, // ඔයාගේ Link එක මෙතනට දාන්න
-  { label: 'LinkedIn', href: '#', icon: 'LI' },
-  { label: 'Twitter',  href: '#', icon: 'TW' },
-  { label: 'Dribbble', href: '#', icon: 'DR' },
+  { label: 'GitHub',   href: 'https://github.com/shifan-mhd', icon: <FaGithub /> },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/anuja-pramodh-77819538b/', icon: <FaLinkedinIn /> },
+  { label: 'Facebook',  href: '#', icon: <FaFacebookF /> },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@anuja_pramodh', icon: <FaTiktok /> },
 ];
-
-const ArrowIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <path d="M5 12h14M12 5l7 7-7 7"/>
-  </svg>
-);
 
 const useInView = (threshold = 0.15) => {
   const ref = useRef(null);
@@ -49,7 +46,6 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    // EmailJS Configuration
     const serviceID = 'service_43wzegv';
     const templateID = 'template_b6vzuwh';
     const publicKey = 'YZz9posTYc6UKeHe4';
@@ -61,16 +57,15 @@ const Contact = () => {
     };
 
     emailjs.send(serviceID, templateID, templateParams, publicKey)
-      .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
+      .then(() => {
         setLoading(false);
         setSent(true);
-        setForm({ name: '', email: '', message: '' }); // Form එක clear කරනවා
+        setForm({ name: '', email: '', message: '' });
       })
       .catch((err) => {
         console.error('FAILED...', err);
         setLoading(false);
-        alert("පණිවිඩය යැවීමට නොහැකි වුණා. කරුණාකර නැවත උත්සාහ කරන්න.");
+        alert("පණිවිඩය යැවීමට නොහැකි වුණා. නැවත උත්සාහ කරන්න.");
       });
   };
 
@@ -90,7 +85,6 @@ const Contact = () => {
         )}
 
         <div className="contact-grid">
-          {/* Left Side */}
           <div className="contact-left">
             {inView && (
               <>
@@ -98,11 +92,9 @@ const Contact = () => {
                   Have a project in mind, a role to fill, or just want to connect?
                   My inbox is always open — I read every message.
                 </p>
-                <a className="contact-email animate-fade-up" href="mailto:alex@porter.dev" style={delay(220)}>
-                  shifan.work@email.com
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                  </svg>
+                <a className="contact-email animate-fade-up" href="mailto:pramodhanuja4@gmail.com" style={delay(220)}>
+                  pramodhanuja4@gmail.com
+                  <FiArrowUpRight className="email-arrow" />
                 </a>
                 <div className="social-links">
                   {socials.map((s, i) => (
@@ -116,19 +108,14 @@ const Contact = () => {
             )}
           </div>
 
-          {/* Right Side (Form) */}
           <div className="contact-right">
-            <svg className="corner-deco" viewBox="0 0 40 40" fill="none">
-              <polyline points="40,0 40,40 0,40" stroke="rgba(124,58,237,0.4)" strokeWidth="1" fill="none"/>
-            </svg>
-
             {sent ? (
               <div className="sent-state">
                 <div className="sent-icon">✓</div>
                 <h3>Message sent!</h3>
                 <p>I'll get back to you within 24–48 hours.</p>
                 <button className="btn-ghost-sm" onClick={() => setSent(false)}>
-                  Send another →
+                  Send another <FiArrowRight />
                 </button>
               </div>
             ) : (
@@ -155,7 +142,7 @@ const Contact = () => {
                     {loading ? (
                       <>Sending <div className="loading-dots"><span/><span/><span/></div></>
                     ) : (
-                      <>Send Message <ArrowIcon /></>
+                      <>Send Message <FiArrowRight /></>
                     )}
                   </button>
                 </form>

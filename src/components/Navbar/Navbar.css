@@ -1,170 +1,164 @@
 /* Navbar.css */
 
+/* --- Navbar --- */
 .nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
+  top: 0; left: 0; right: 0;
+  height: 80px;
   display: flex;
   align-items: center;
-  /* Desktop එකේදී අයිතම මැදට ගැනීමට */
-  justify-content: center; 
-  padding: 0 48px;
-  height: 80px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  justify-content: center;
+  padding: 0 40px;
+  z-index: 1001;
+  transition: all 0.4s ease;
+  background: transparent; /* transparent over hero */
 }
 
-/* Scroll කළ පසු වීදුරුවක් වැනි පෙනුම (Glassmorphism) */
 .nav.scrolled {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
   height: 70px;
-  background: rgba(7, 8, 15, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ── Nav Links (Desktop) ── */
+/* Overlay */
+.nav-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Links */
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: 80px;
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .nav-links a {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--text-dim); /* index.css හි ඇති අගය */
   text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: all 0.3s ease;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
   position: relative;
-  padding: 8px 0;
+  padding: 2px 0;
+  transition: color 0.3s ease;
 }
 
-/* Hover Animation (යටින් ඉරක් ඒම) */
 .nav-links a::after {
   content: '';
   position: absolute;
-  bottom: 0;
   left: 0;
-  width: 100%;
+  bottom: -3px;
+  width: 0%;
   height: 2px;
-  background: var(--primary);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
+  background: #7c3aed;
+  transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #fff;
+  color: #7c3aed;
 }
 
 .nav-links a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+  width: 100%;
 }
 
-/* ── Download CV Button (Always Right) ── */
+/* CV Button */
 .nav-cta {
-  /* Absolute පාවිච්චි කිරීමෙන් Links වල මැද පිහිටීමට බාධා නොවේ */
   position: absolute;
-  right: 48px;
-
+  right: 40px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 22px;
-  border-radius: 12px;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
   color: #fff;
-  font-size: 13px;
-  font-weight: 500;
   text-decoration: none;
+  font-size: 13px;
   transition: all 0.3s ease;
-  white-space: nowrap;
 }
 
 .nav-cta:hover {
   background: rgba(124, 58, 237, 0.1);
-  border-color: var(--primary);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px -10px rgba(124, 58, 237, 0.4);
+  border-color: #7c3aed;
 }
 
-/* ── Mobile Toggle Button (Hamburger) ── */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  left: 24px;
-}
-
-.bar {
-  width: 24px;
-  height: 2px;
-  background: #fff;
-  transition: 0.3s;
-  border-radius: 2px;
-}
-
-/* ── RESPONSIVE RULES (Tablet & Mobile) ── */
-
+/* Mobile Menu */
 @media (max-width: 900px) {
-  .nav {
-    padding: 0 24px;
-    justify-content: flex-end; /* Mobile එකේදී බටන් එක දකුණට කරයි */
-  }
-
   .menu-toggle {
-    display: flex; /* Mobile එකේදී Hamburger එක පෙන්වයි */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    left: 24px;
+    z-index: 1100;
   }
 
-  /* Hamburger Animation */
-  .menu-open .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .bar { width: 22px; height: 2px; background: #fff; transition: 0.3s; }
+  .menu-open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .menu-open .bar:nth-child(2) { opacity: 0; }
-  .menu-open .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  .menu-open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* Mobile Slide-in Menu */
   .nav-links {
     position: fixed;
-    top: 0;
-    left: -100%; /* වම් පස සැඟවී ඇත */
-    width: 300px;
+    top: 0; left: -100%;
+    width: 280px;
     height: 100vh;
-    background: #07080f;
+    background: #070815;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 0 50px;
-    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    gap: 35px;
+    justify-content: flex-start;
+    padding: 100px 40px;
+    gap: 25px;
+    z-index: 1000;
+    transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
     box-shadow: 15px 0 50px rgba(0,0,0,0.5);
   }
 
-  .nav-links.active {
-    left: 0; /* Slide වී ඇතුළට පැමිණේ */
+  .nav-links.active { left: 0; }
+
+  .mobile-header {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #7c3aed;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
   }
 
   .nav-links a {
-    font-size: 18px; /* Mobile එකේදී අකුරු මදක් විශාල වේ */
+    font-size: 18px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
   }
 
-  /* Mobile එකේදී Button එකේ Text එක සඟවා Icon එක පමණක් පෙන්වීමට (Optional) */
-  .nav-cta span {
-    display: none;
-  }
-  
-  .nav-cta {
-    position: static;
-    padding: 12px;
+  .nav-cta span { display: none; }
+  .nav-cta { 
+    position: absolute;
+    right: 20px; 
+    padding: 15px;
     border-radius: 50%;
+    width: 45px; height: 45px;
   }
+}
+
+@media (min-width: 901px) {
+  .mobile-header, .menu-toggle { display: none; }
 }

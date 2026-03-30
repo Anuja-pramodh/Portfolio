@@ -3,10 +3,22 @@ import DotGrid from '../Animation/DotGrid/DotGrid';
 import './Hero.css';
 import profileImg from '../../assets/abimg.png';
 
+// 🔥 Dynamic Data (easy to update later)
+const HERO_DATA = {
+  firstName: "Anuja",
+  lastName: "Pramodh",
+  roles: ["Full-Stack Developer", "Unity Game Developer", "Creative Video Editor"],
+  location: "Sri Lanka",
+  description:
+    "I build high-performance web applications, interactive games, and creative video content with a focus on clean architecture and smooth user experiences.",
+  projectsCount: "10+",
+};
+
 const Hero = () => {
   return (
-    <section className="hero" id="home">
-      {/* Dynamic Background */}
+    <section className="hero" id="home" aria-label="Hero section">
+      
+      {/* Background */}
       <div className="hero-bg">
         <DotGrid
           dotSize={3}
@@ -22,28 +34,40 @@ const Hero = () => {
       </div>
 
       <div className="hero-wrapper">
-        {/* LEFT SIDE: Typography */}
+        
+        {/* LEFT */}
         <div className="hero-content">
+          
           <div className="hero-badge">
             <span className="pulse-icon"></span>
             Available for Hire
           </div>
 
           <h1 className="hero-name">
-            Anuja <br />
-            <span className="hero-name--outline">Pramodh</span>
+            {HERO_DATA.firstName} <br />
+            <span className="hero-name--outline">
+              {HERO_DATA.lastName}
+            </span>
           </h1>
 
           <div className="hero-meta">
-            <span className="hero-role">Full-Stack Developer</span>
+            <span className="hero-role">
+              {HERO_DATA.roles[0]}
+            </span>
             <div className="hero-sep"></div>
-            <span className="hero-loc">Sri Lanka</span>
+            <span className="hero-loc">
+              {HERO_DATA.location}
+            </span>
           </div>
 
           <p className="hero-description">
-            I build high-performance web applications with a focus on 
-            clean architecture and intuitive user experiences.
+            {HERO_DATA.description}
           </p>
+
+          {/* 🔥 Social Proof */}
+          <div className="hero-proof">
+            🚀 Projects Built: {HERO_DATA.projectsCount}
+          </div>
 
           <div className="hero-cta">
             <a href="#projects" className="btn-primary">View Work</a>
@@ -51,13 +75,19 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* RIGHT SIDE: 3D Image Card */}
+        {/* RIGHT */}
         <div className="hero-image-container">
           <div className="glass-card">
-            <img src={profileImg} alt="Anuja Pramodh" className="hero-photo" />
+            <img 
+              src={profileImg} 
+              alt="Anuja Pramodh profile"
+              className="hero-photo"
+              loading="lazy"
+            />
             <div className="card-glow"></div>
           </div>
         </div>
+
       </div>
     </section>
   );

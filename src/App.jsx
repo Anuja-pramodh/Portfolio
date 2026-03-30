@@ -14,9 +14,9 @@ function App() {
       <main>
         <Hero />
         <hr className="divider" />
-        <About />
-        <hr className="divider" />
         <Projects />
+        <hr className="divider" />
+        <About />
         <hr className="divider" />
         <Contact />
       </main>
@@ -32,8 +32,9 @@ export default App;
 {/* 
 
 git add .
-git commit -m "Update portfolio and features"
+git commit -m "Update"
 git push origin main 
 
+npm run deploy
 
 */}

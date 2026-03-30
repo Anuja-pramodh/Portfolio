@@ -1,94 +1,136 @@
-import { useState } from 'react';
-import './Projects.css';
+import React, { useRef, useEffect, useState } from "react";
+import "./Projects.css";
 
-const projects = [
+const projectsData = [
   {
-    id: '01',
-    title: 'Orbit Dashboard',
-    category: 'Full-Stack App',
-    desc: 'Real-time analytics dashboard for SaaS metrics. Built with React, Node.js, and WebSockets. Handles 50k+ data points per second.',
-    tags: ['React', 'Node.js', 'PostgreSQL', 'WebSockets'],
-    year: '2024',
-    link: '#',
+    id: "01",
+    title: "UniSphere",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=70",
+    description:
+      "A web-based platform delivering a seamless, user-friendly experience. Focused on UI/UX consistency, team coordination, and risk management.",
+    category: "Web Development",
+    year: "2026",
+    tags: ["React", "CSS", "UI/UX", "Project Management"],
   },
   {
-    id: '02',
-    title: 'Folio CMS',
-    category: 'Web Application',
-    desc: 'Headless CMS with a custom rich-text editor, media pipeline, and GraphQL API. Used by 200+ content creators.',
-    tags: ['Next.js', 'GraphQL', 'Prisma', 'S3'],
-    year: '2024',
-    link: '#',
+    id: "02",
+    title: "NovaDash",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=70",
+    description:
+      "Real-time analytics dashboard with customisable widgets, live data streaming, and deep integrations with third-party APIs.",
+    category: "Dashboard",
+    year: "2025",
+    tags: ["TypeScript", "D3.js", "WebSocket", "REST API"],
   },
   {
-    id: '03',
-    title: 'Trace CLI',
-    category: 'Dev Tooling',
-    desc: 'Command-line tool for distributed tracing in Node.js microservices. 1.2k stars on GitHub.',
-    tags: ['Node.js', 'CLI', 'OpenTelemetry'],
-    year: '2023',
-    link: '#',
+    id: "03",
+    title: "PulseAI",
+    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=70",
+    description:
+      "An AI-powered content generation tool with context-aware suggestions, brand voice training, and collaborative editing workflows.",
+    category: "AI / ML",
+    year: "2025",
+    tags: ["Python", "FastAPI", "LLM", "Next.js"],
   },
   {
-    id: '04',
-    title: 'Palate — Recipe App',
-    category: 'Mobile-First Web',
-    desc: 'AI-assisted recipe discovery with dietary filters, smart pantry tracking, and social sharing.',
-    tags: ['React', 'OpenAI API', 'Supabase'],
-    year: '2023',
-    link: '#',
+    id: "04",
+    title: "TerraNest",
+    image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&q=70",
+    description:
+      "A sustainability tracker that gamifies eco-friendly habits, visualises your carbon footprint reduction, and connects local green communities.",
+    category: "Mobile App",
+    year: "2024",
+    tags: ["React Native", "Node.js", "PostgreSQL"],
   },
 ];
 
-const Projects = () => {
-  const [hovered, setHovered] = useState(null);
+const ProjectRow = ({ project, index }) => {
+  const rowRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+    );
+    if (rowRef.current) observer.observe(rowRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="projects" id="projects">
-      <div className="projects-header">
-        <div>
-          <p className="section-label">Selected Work</p>
-          <h2 className="section-title">Projects</h2>
-        </div>
-        <a href="#" className="view-all-link">
-          All work
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
+    <a
+      href="#projects"
+      className={`project-row ${visible ? "project-row--visible" : ""}`}
+      ref={rowRef}
+      style={{ "--delay": `${index * 120}ms` }}
+    >
+      <span className="project-id">{project.id}</span>
+
+      <div className="project-img-wrapper">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="project-inline-img"
+          loading="lazy"
+        />
       </div>
 
-      <div className="projects-list">
-        {projects.map((p) => (
-          <a
-            key={p.id}
-            href={p.link}
-            className={`project-row ${hovered && hovered !== p.id ? 'project-row--dim' : ''}`}
-            onMouseEnter={() => setHovered(p.id)}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <span className="project-id">{p.id}</span>
+      <div className="project-info">
+        <h3 className="project-title">{project.title}</h3>
+        <p className="project-desc">{project.description}</p>
+        <div className="project-tags">
+          {project.tags.map((tag, i) => (
+            <span key={i} className="project-tag" style={{ "--ti": i }}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
 
-            <div className="project-info">
-              <h3 className="project-title">{p.title}</h3>
-              <p className="project-desc">{p.desc}</p>
-              <div className="project-tags">
-                {p.tags.map(t => <span key={t}>{t}</span>)}
-              </div>
-            </div>
+      <div className="project-meta">
+        <span className="project-category">{project.category}</span>
+        <span className="project-year">{project.year}</span>
+      </div>
 
-            <div className="project-meta">
-              <span className="project-category">{p.category}</span>
-              <span className="project-year">{p.year}</span>
-            </div>
+      <div className="project-arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M2 12L12 2M12 2H6M12 2V8"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
 
-            <div className="project-arrow">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M7 17L17 7M17 7H7M17 7v10"/>
-              </svg>
-            </div>
-          </a>
-        ))}
+      <div className="project-row__glow" aria-hidden="true" />
+    </a>
+  );
+};
+
+const Projects = () => {
+  return (
+    <section className="projects" id="projects">
+      <div className="projects-container">
+        <div className="projects-header">
+          <h2 className="projects-heading">
+            My <span>Projects</span>
+          </h2>
+          <span className="projects-count">
+            {String(projectsData.length).padStart(2, "0")} total
+          </span>
+        </div>
+        <div className="projects-list">
+          {projectsData.map((project, index) => (
+            <ProjectRow key={project.id} project={project} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );

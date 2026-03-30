@@ -1,10 +1,13 @@
 /* src/index.css */
 :root {
-  --primary: #3b82f6;
-  --bg-dark: #0f172a;
-  --bg-card: #1e293b;
-  --text-main: #f8fafc;
+  --primary: #7c3aed;            /* Vibrant Violet */
+  --primary-glow: rgba(124, 58, 237, 0.4);
+  --bg-dark: #07080f;            /* Deep black-blue from your image */
+  --bg-card: rgba(255, 255, 255, 0.03); 
+  --border: rgba(255, 255, 255, 0.08);
+  --text-main: #ffffff;
   --text-dim: #94a3b8;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
 }
 
 * {
@@ -14,18 +17,24 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-display);
   background-color: var(--bg-dark);
   color: var(--text-main);
   line-height: 1.6;
+  overflow-x: hidden; /* Prevents horizontal scroll from animations */
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: 0.3s;
+/* Custom Scrollbar to match the theme */
+::-webkit-scrollbar {
+  width: 8px;
 }
-
-ul {
-  list-style: none;
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
 }

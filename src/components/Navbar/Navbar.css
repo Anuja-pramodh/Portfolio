@@ -1,142 +1,170 @@
-:root {
-  --nav-accent: #7c3aed; /* Electric Violet */
-  --nav-bg: #030712;
-  --nav-text: #94a3b8;
-  --nav-text-hover: #ffffff;
-  --nav-glass: rgba(3, 7, 18, 0.7);
-  --nav-border: rgba(255, 255, 255, 0.08);
-  --font-display: 'Inter', 'DM Sans', sans-serif;
-}
+/* Navbar.css */
 
-/* ── Base ── */
-.navbar {
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 2rem 8%;
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 1000;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Desktop එකේදී අයිතම මැදට ගැනීමට */
+  justify-content: center; 
+  padding: 0 48px;
+  height: 80px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ── Floating Pill Effect on Scroll ── */
-.navbar--scrolled {
-  padding: 1rem 8%;
+/* Scroll කළ පසු වීදුරුවක් වැනි පෙනුම (Glassmorphism) */
+.nav.scrolled {
+  height: 70px;
+  background: rgba(7, 8, 15, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.navbar--scrolled .nav-links {
-  background: var(--nav-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--nav-border);
-  padding: 0.7rem 2.5rem;
-  border-radius: 100px; /* Modern Pill Shape */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* ── Nav links ── */
+/* ── Nav Links (Desktop) ── */
 .nav-links {
   display: flex;
-  gap: 3rem;
+  gap: 40px;
   list-style: none;
   margin: 0;
   padding: 0;
-  align-items: center;
-  transition: all 0.4s ease;
 }
 
 .nav-links a {
-  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-dim); /* index.css හි ඇති අගය */
   text-decoration: none;
-  color: var(--nav-text);
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
   position: relative;
   padding: 8px 0;
-  transition: color 0.3s ease;
 }
 
-/* ── Elegant Hover Underline ── */
+/* Hover Animation (යටින් ඉරක් ඒම) */
 .nav-links a::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 50%;
-  width: 0;
+  left: 0;
+  width: 100%;
   height: 2px;
-  background: var(--nav-accent);
-  border-radius: 2px;
-  transform: translateX(-50%);
-  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: var(--nav-text-hover);
+  color: #fff;
 }
 
 .nav-links a:hover::after {
-  width: 100%;
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
-/* ── Hamburger (Mobile) ── */
-.hamburger {
+/* ── Download CV Button (Always Right) ── */
+.nav-cta {
+  /* Absolute පාවිච්චි කිරීමෙන් Links වල මැද පිහිටීමට බාධා නොවේ */
+  position: absolute;
+  right: 48px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-cta:hover {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -10px rgba(124, 58, 237, 0.4);
+}
+
+/* ── Mobile Toggle Button (Hamburger) ── */
+.menu-toggle {
   display: none;
   flex-direction: column;
   gap: 6px;
-  background: var(--nav-glass);
-  border: 1px solid var(--nav-border);
+  background: none;
+  border: none;
   cursor: pointer;
-  padding: 12px;
-  border-radius: 12px;
   position: absolute;
-  right: 5%;
-  z-index: 1100;
-  backdrop-filter: blur(10px);
+  left: 24px;
 }
 
-.hamburger span {
-  display: block;
-  width: 22px;
+.bar {
+  width: 24px;
   height: 2px;
-  background: var(--nav-text-hover);
-  transition: all 0.3s ease;
+  background: #fff;
+  transition: 0.3s;
+  border-radius: 2px;
 }
 
-.hamburger--open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.hamburger--open span:nth-child(2) { opacity: 0; width: 0; }
-.hamburger--open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+/* ── RESPONSIVE RULES (Tablet & Mobile) ── */
 
-/* ── Mobile Menu ── */
-@media (max-width: 768px) {
-  .hamburger { display: flex; }
-
-  /* On mobile, we don't want the pill background during scroll */
-  .navbar--scrolled .nav-links {
-    background: none;
-    border: none;
-    padding: 0;
-    backdrop-filter: none;
+@media (max-width: 900px) {
+  .nav {
+    padding: 0 24px;
+    justify-content: flex-end; /* Mobile එකේදී බටන් එක දකුණට කරයි */
   }
 
+  .menu-toggle {
+    display: flex; /* Mobile එකේදී Hamburger එක පෙන්වයි */
+  }
+
+  /* Hamburger Animation */
+  .menu-open .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .menu-open .bar:nth-child(2) { opacity: 0; }
+  .menu-open .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* Mobile Slide-in Menu */
   .nav-links {
     position: fixed;
-    inset: 0;
-    background: var(--nav-bg);
+    top: 0;
+    left: -100%; /* වම් පස සැඟවී ඇත */
+    width: 300px;
+    height: 100vh;
+    background: #07080f;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
-    gap: 2.5rem;
-    transform: translateX(100%);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0 50px;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 35px;
+    box-shadow: 15px 0 50px rgba(0,0,0,0.5);
   }
 
-  .nav-links--open { transform: translateX(0); }
+  .nav-links.active {
+    left: 0; /* Slide වී ඇතුළට පැමිණේ */
+  }
 
-  .nav-links a { 
-    font-size: 1.8rem; 
-    font-weight: 700;
+  .nav-links a {
+    font-size: 18px; /* Mobile එකේදී අකුරු මදක් විශාල වේ */
+  }
+
+  /* Mobile එකේදී Button එකේ Text එක සඟවා Icon එක පමණක් පෙන්වීමට (Optional) */
+  .nav-cta span {
+    display: none;
+  }
+  
+  .nav-cta {
+    position: static;
+    padding: 12px;
+    border-radius: 50%;
   }
 }

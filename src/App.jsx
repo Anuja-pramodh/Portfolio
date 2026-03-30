@@ -5,6 +5,7 @@ import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
 import About from './components/About/About';
 import Footer from './components/Footer/Footer';
+import Skills from './components/Skills/Skills';
 import './App.css';
 
 function App() {
@@ -13,11 +14,8 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <hr className="divider" />
-        <Projects />
-        <hr className="divider" />
         <About />
-        <hr className="divider" />
+        <Projects />
         <Contact />
       </main>
       <Footer />

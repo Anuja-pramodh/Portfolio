@@ -3,7 +3,7 @@ import DotGrid from '../Animation/DotGrid/DotGrid';
 import './Hero.css';
 import profileImg from '../../assets/abimg.png';
 
-// 🔥 Dynamic Data (easy to update later)
+
 const HERO_DATA = {
   firstName: "Anuja",
   lastName: "Pramodh",

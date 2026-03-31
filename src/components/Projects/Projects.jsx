@@ -13,35 +13,35 @@ const projectsData = [
     tags: ["React", "CSS", "UI/UX", "Project Management"],
   },
   {
-    id: "02",
-    title: "NovaDash",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=70",
-    description:
-      "Real-time analytics dashboard with customisable widgets, live data streaming, and deep integrations with third-party APIs.",
-    category: "Dashboard",
-    year: "2025",
-    tags: ["TypeScript", "D3.js", "WebSocket", "REST API"],
+  id: "02",
+  title: "Java Banking System",
+  image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=70",
+  description:
+    "A robust banking application developed using Java and OOP principles. Supports account management, deposits, withdrawals, transfers, and CSV-based data handling with GUI integration.",
+  category: "Software Development",
+  year: "2025",
+  tags: ["Java", "OOP", "CSV", "GUI", "File Handling"],
   },
   {
-    id: "03",
-    title: "PulseAI",
-    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=70",
-    description:
-      "An AI-powered content generation tool with context-aware suggestions, brand voice training, and collaborative editing workflows.",
-    category: "AI / ML",
-    year: "2025",
-    tags: ["Python", "FastAPI", "LLM", "Next.js"],
-  },
-  {
-    id: "04",
-    title: "TerraNest",
-    image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&q=70",
-    description:
-      "A sustainability tracker that gamifies eco-friendly habits, visualises your carbon footprint reduction, and connects local green communities.",
-    category: "Mobile App",
-    year: "2024",
-    tags: ["React Native", "Node.js", "PostgreSQL"],
-  },
+  id: "03",
+  title: "Lakdiwa Holidays",
+  image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=70",
+  description:
+    "A responsive travel and tourism website designed to showcase Sri Lankan destinations and tour packages. Features an intuitive user interface for exploring trips and making inquiries.",
+  category: "Web Development",
+  year: "2025",
+  tags: ["HTML", "CSS", "JavaScript", "Responsive Design", "UI/UX"],
+},
+{
+  id: "04",
+  title: "Weather App",
+  image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&q=70",
+  description:
+    "A modern weather application that integrates real-time data from external APIs to provide accurate weather forecasts. Features dynamic search functionality, responsive design, and a clean user interface for an enhanced user experience.",
+  category: "Web Development",
+  year: "2025",
+  tags: ["JavaScript", "REST API", "HTML", "CSS", "Responsive UI"],
+}
 ];
 
 const ProjectRow = ({ project, index }) => {

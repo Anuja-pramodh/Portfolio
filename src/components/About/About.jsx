@@ -54,7 +54,7 @@ const About = () => {
       <div className="about-bg-animation">
         <Particles
           particleColors={["#ffffff", "#7c3aed"]}
-          particleCount={100}
+          particleCount={6000}
           particleSpread={10}
           speed={0.1}
           particleBaseSize={100}
